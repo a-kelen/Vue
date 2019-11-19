@@ -2,7 +2,7 @@
     <div>
   <v-sheet elevation="4" class="ma-2">
       <v-sheet color="green" class="pa-2 d-flex align-center">
-          <v-avatar color="white" class="">
+          <v-avatar size="36" color="white" class="">
               <span>AK</span>
           </v-avatar>
           <div class="display-5 mx-3">Firstname Lasname</div>
@@ -27,14 +27,15 @@
         </v-btn>
       </v-sheet>
   </v-sheet>
-  <v-sheet v-if="showComms" class="ma-4" color="grey lighten-3">
+  <v-sheet v-if="showComms" class="mx-5" elevation="2" >
       <v-sheet color="d-flex align-center" dense>
             <v-text-field class="mx-2" color="green" v-model="activeWritenComm"></v-text-field>
             <v-btn class="mx-3">
                 <v-icon>mdi-send</v-icon>
             </v-btn>
       </v-sheet>
-      
+      <v-divider ></v-divider>
+      <Comment/>
       <Comment/>
   </v-sheet>
 
