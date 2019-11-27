@@ -13,7 +13,7 @@
         <span>AQ</span>
       </v-avatar>
       
-      <div class="mx-5">Audition 1</div>
+      <router-link to="/auditions/1">Audition 1</router-link>
       
       <v-spacer></v-spacer>
       <v-btn class="ma-1 mx-3">Subscribe</v-btn>

@@ -21,7 +21,7 @@
       <v-spacer></v-spacer>
       <div >
         <div>from Audition1</div>
-        <v-btn class="ma-auto">Go</v-btn>
+        <v-btn @click="goTest" class="ma-auto">Go</v-btn>
       </div>
         
   
@@ -39,7 +39,10 @@ export default {
     //
   }),
   methods : {
-
-  }
+    goTest() {
+       this.$router.push('test/1');
+    }
+  },
+  
 }
 </script>

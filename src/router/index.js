@@ -7,6 +7,10 @@ import Results from '../views/Results.vue'
 import MasterAudition from '../views/MasterAudition.vue'
 import Chats from '../views/Chats.vue'
 import UserCabinet from '../views/UserCabinet.vue'
+import Audition from '../views/Audition.vue'
+import EditAudition from '../views/EditAudition.vue'
+import CreateTest from '../views/CreateTest.vue'
+import Test from '../views/Test.vue';
 
 Vue.use(VueRouter)
 
@@ -22,9 +26,29 @@ const routes = [
     component: Auditions
   },
   {
+    path: '/auditions/:id',
+    name: 'audition',
+    component: Audition
+  },
+  {
+    path: '/editAudition/:id',
+    name: 'editAudition',
+    component: EditAudition
+  },
+  {
     path: '/tests',
     name: 'tests',
     component: Tests
+  },
+  {
+    path: '/createtest',
+    name: 'createtest',
+    component: CreateTest
+  },
+  {
+    path: '/test/:id',
+    name: 'test',
+    component: Test
   },
   {
     path: '/results',
