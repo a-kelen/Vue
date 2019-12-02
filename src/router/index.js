@@ -11,7 +11,9 @@ import Audition from '../views/Audition.vue'
 import EditAudition from '../views/EditAudition.vue'
 import CreateTest from '../views/CreateTest.vue'
 import Test from '../views/Test.vue';
-
+import Login from '../views/Login.vue'
+import EditTest from '../views/EditTest.vue'
+import AuditionTests from '../views/AuditionTests.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,9 +43,19 @@ const routes = [
     component: Tests
   },
   {
-    path: '/createtest',
+    path: '/auditionTests/:id',
+    name: 'auditionTests',
+    component: AuditionTests
+  },
+  {
+    path: '/createtest/:id',
     name: 'createtest',
     component: CreateTest
+  },
+  {
+    path: '/edittest/:id',
+    name: 'edittest',
+    component: EditTest
   },
   {
     path: '/test/:id',
@@ -64,6 +76,11 @@ const routes = [
     path: '/chats',
     name: 'chats',
     component: Chats
+  },
+  {
+    path: '/sign',
+    name: 'sign',
+    component: Login
   },
   {
     path: '/usercabinet',

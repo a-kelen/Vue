@@ -10,6 +10,7 @@
 <script>
 
 import Navbar from './components/Navbar'
+import { mapGetters, mapState } from "vuex";
 
 export default {
   name: 'App',
@@ -18,7 +19,14 @@ export default {
   },
   data: () => ({
     //
-  })
+  }),
+  created() {
+  },
+  computed:{
+    ...mapState({
+      id : s => s.UserProfile.user,
+    }),
+  }
 }
 </script>
 <style >

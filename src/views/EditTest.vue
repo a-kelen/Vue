@@ -1,22 +1,33 @@
 <template>
   <v-container>
-      <v-text-field v-model="newTest"></v-text-field>
+      <v-text-field v-model="test.title"></v-text-field>
       <v-btn @click="addQuestion">
           <v-icon>mdi-plus</v-icon>
           <span>Add Question</span>
       </v-btn>
-     <CreateQuestion v-for="(q,i) in questions" :index="i" :question="q"  v-on:remove="questions.splice(i, 1)" :key="i"></CreateQuestion>
-     <v-btn @click="addTest">Submit</v-btn>            
+     <CreateQuestion v-for="(q,i) in test.questions" :index="i" :question="q"  v-on:remove="questions.splice(i, 1)" :key="i"></CreateQuestion>
+     <v-btn @click="updateTest">Update</v-btn>            
   </v-container>
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex';
+
 import CreateQuestion from '../components/CreateQuestion.vue'
 export default {
   data: () => ({
-    newTest: '',
-    questions: [],
+    test : null,
   }),
+  created() {
+      this.test = this.getTest(this.$route.params.id);
+      
+      
+  },
+  computed: {
+...mapGetters({
+    getTest : 'Test/getTest'   
+})
+  },
   methods: {
       addQuestion() {
         this.questions.push({
@@ -25,13 +36,9 @@ export default {
            correct : null
            });
       },
-      addTest() {
+      updateTest() {
         
-        this.$store.dispatch('Test/createTest',{
-       title : this.newTest,
-       questions : this.questions,
-       auditionId: this.$route.params.id
-      });
+        this.$store.dispatch('Test/updateTest',this.test);
       },
     removeQuestion() {
         this.questions.splice(i,1);
@@ -39,6 +46,8 @@ export default {
   },
   components: {
       CreateQuestion
-  }
+  },
+  
+  
 }
 </script>

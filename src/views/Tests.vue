@@ -7,12 +7,12 @@
       </v-btn>
   </v-sheet>
   <v-sheet>
-    <v-sheet class="d-flex  pa-3">
+    <v-sheet v-for="(t,i) in tests" :key="i" class="d-flex  pa-3">
 
      <div>
-        <div class="mx-5">Test 1</div>
-        <div class="mx-5 caption">12 answer(s)</div>
-        <div class="mx-5 caption">Completed</div>
+        <div class="mx-5">{{t.title}}</div>
+        <div class="mx-5 caption">{{t.questions.length}} question(s)</div>
+        
 
      </div>
       
@@ -20,8 +20,11 @@
       
       <v-spacer></v-spacer>
       <div >
-        <div>from Audition1</div>
-        <v-btn @click="goTest" class="ma-auto">Go</v-btn>
+        <div><span class="subtitle-2">from</span> {{t.audition.name}}</div>
+        <router-link :to="{ name: 'test', params: { id: t.id , test : t }}">
+          <v-btn class="ma-auto">Go</v-btn>
+        </router-link>
+        
       </div>
         
   
@@ -32,6 +35,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 
 export default {
   name: 'Tests',
@@ -39,10 +43,16 @@ export default {
     //
   }),
   methods : {
-    goTest() {
-       this.$router.push('test/1');
-    }
+    
   },
+  computed: {
+    ...mapState({
+      tests: s => s.Test.allTests
+    })
+  },
+  created() {
+    this.$store.dispatch('Test/getAllTests');
+  }
   
 }
 </script>

@@ -14,7 +14,7 @@
           <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
         </v-list-item-avatar>
 
-        <v-list-item-title>John Leider</v-list-item-title>
+        <v-list-item-title>{{profile.FirstName}} {{profile.LastName}}</v-list-item-title>
 
         <v-btn
           icon
@@ -55,7 +55,7 @@
           dark
           v-on="on"
         >
-          Admin
+          {{user.Email}}
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
       </template>
@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import {mapState,mapGetters} from 'vuex'
 export default {
   data: () => ({
     drawer : false,
@@ -92,6 +93,13 @@ export default {
           { title: 'User Cabinet', icon: 'mdi-account-check' , path : '/usercabinet'},
         ],
   }),
+  computed: {
+    ...mapState({
+      profile: state => state.UserProfile.profile,
+      user: state => state.UserProfile.user
+    }),
+    
+  },
   methods : {
     go: function() {
       

@@ -6,10 +6,10 @@
               <span>AA</span>
              </v-avatar>
           </div>
-          <div class="mx-2">Author A</div>
+          <div class="mx-2">{{comment.userProfile.firstName}} {{comment.userProfile.lastName}}</div>
           <div class="mx-2 ml-auto">time</div>
       </v-sheet>
-      <v-sheet color="" class="ma-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae earum, fugit esse perferendis autem dolor. Adipisci, possimus corrupti. Reprehenderit quae eveniet cum dolorum ratione saepe animi impedit natus et officia.</v-sheet>
+      <v-sheet color="" class="ma-2"> {{comment.text}} </v-sheet>
       <v-divider></v-divider>
   </v-sheet>
 </template>
@@ -19,6 +19,7 @@ export default {
   name : 'Comment',
   data: () => ({
     
-  })
+  }),
+  props: ['comment'] 
 }
 </script>

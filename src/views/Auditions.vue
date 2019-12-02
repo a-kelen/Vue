@@ -7,58 +7,40 @@
       </v-btn>
   </v-sheet>
   <v-sheet>
-    <v-sheet class="d-flex  pa-3">
-
-      <v-avatar size="80" color="grey darken-2">
-        <span>AQ</span>
-      </v-avatar>
-      
-      <router-link to="/auditions/1">Audition 1</router-link>
-      
-      <v-spacer></v-spacer>
-      <v-btn class="ma-1 mx-3">Subscribe</v-btn>
-        <v-menu offset-y >
-       <template v-slot:activator="{ on }">
-        <v-btn
-          class="ma-1"
-          color="grey accent-4"
-          dark
-          v-on="on"
-          
-        >
-          
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-       </template>
-       <v-list>
-        <v-list-item
-          @click="theme = !theme"
-        >
-          <v-list-item-title>Change Theme</v-list-item-title>
-        </v-list-item>
-        <v-list-item
-          @click="go"
-        >
-          <v-list-item-title>Log Out</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
-  
-      
-    </v-sheet>
+    <AuditionItem v-for="(a,i) in auditions" :key="i" :audition="a"></AuditionItem>  
   </v-sheet>
 </v-container>
 </template>
 
 <script>
-
+import UserService from "@/services/user.service";
+import AuditionItem from '../components/AuditionItem'
+import {mapState} from 'vuex'
+import { log } from 'util';
 export default {
   name: 'Auditions',
   data: () => ({
     //
   }),
   methods : {
-
+    go(){},
+    subscribeAudition(id) {
+      this.$store.dispatch('Audition/subscribe',{auditionId : id, userId : this.id.Id });
+    },
+  },
+  created : function() {
+    this.$store.dispatch('Audition/getAuditions',1);
+    this.$store.dispatch('Audition/getSubscribes',this.id.Id);
+  },
+  computed: {
+    ...mapState({
+      id : s => s.UserProfile.user,
+      auditions : s => s.Audition.auditions ,
+      subscribes: s => s.Audition.subscribes
+    })
+  },
+  components: {
+    AuditionItem
   }
 }
 </script>
