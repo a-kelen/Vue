@@ -29,6 +29,7 @@ export default {
     },
   },
   created : function() {
+    console.log('why');
     this.$store.dispatch('Audition/getAuditions',1);
     this.$store.dispatch('Audition/getSubscribes',this.id.Id);
   },

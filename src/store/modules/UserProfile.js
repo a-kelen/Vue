@@ -38,6 +38,11 @@ const state = {
     },
     getProfile({commit,state}) {
         Axios.get()
+    },
+    changePassword({commit},obj) {
+      Axios.post('/api/UserProfiles/changepassword',obj).then(res => {
+          console.log(res);
+      });
     }
 
 

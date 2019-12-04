@@ -1,10 +1,14 @@
 <template>
-  <v-container>
-    <v-sheet class="d-flex ">
+  <v-container v-if="tests.length!=0">
+    <!-- <v-sheet class="d-flex ">
     <v-text-field></v-text-field>
       <v-btn class="ma-2">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
+  </v-sheet> -->
+  <v-sheet>
+    <v-btn  v-for="i in count/2" :key="i" @click="toTest(i)" class="mx-1" min-width="1em">{{i}}</v-btn>
+    
   </v-sheet>
   <v-sheet>
     <v-sheet v-for="(t,i) in tests" :key="i" class="d-flex  pa-3">
@@ -12,8 +16,6 @@
      <div>
         <div class="mx-5">{{t.title}}</div>
         <div class="mx-5 caption">{{t.questions.length}} question(s)</div>
-        
-
      </div>
       
       
@@ -43,15 +45,19 @@ export default {
     //
   }),
   methods : {
-    
+    toTest(id) {
+    this.$store.dispatch('Test/getAllTests',id);
+console.log(id);
+    }
   },
   computed: {
     ...mapState({
-      tests: s => s.Test.allTests
+      tests: s => s.Test.allTests,
+      count: s => s.Test.count
     })
   },
   created() {
-    this.$store.dispatch('Test/getAllTests');
+    this.$store.dispatch('Test/getAllTests',1);
   }
   
 }

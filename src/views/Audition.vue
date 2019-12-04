@@ -3,7 +3,8 @@
     <v-row>
       <v-col cols="12" sm="3">
         <v-avatar size="150" color="grey darken-2">
-        <span>AQ</span>
+       <v-img v-if="audition.photo!=null" :src="image" ></v-img>
+        <span v-else>{{audition.name[0]}}</span>
       </v-avatar>
       </v-col>
       <v-col cols="12" sm="8">
@@ -75,7 +76,10 @@ export default {
     }),
     isSubscribe(){
         return this.subscribes.find(x=>x.auditionId == this.audition.id) != null;
-    }
+    },
+    image() {
+          return 'https://localhost:44312' + this.audition.photo;
+      },
   },
   created() {
      this.audition = this.gaudition(this.$route.params.id);

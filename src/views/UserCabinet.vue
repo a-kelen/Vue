@@ -29,6 +29,7 @@
             label="Old Password"
             hint="At least 8 characters"
             value=""
+            v-model="oldPassword"
             class="input-group--focused pa-2"
             @click:append="showPassword = !showPassword"
           ></v-text-field>
@@ -43,11 +44,12 @@
             hint="At least 8 characters"
             value=""
             class="input-group--focused"
+            v-model="newPassword"
             @click:append="showPassword = !showPassword"
           ></v-text-field>
         </v-col>
         <v-col cols="12" sm="2">
-          <v-btn color="blue" dark class="ma-3">Change </v-btn>
+          <v-btn @click="changePassword" color="blue" dark class="ma-3">Change </v-btn>
         </v-col>
         <v-col cols="12" sm="2">
           <v-btn @click="save" color="primary">Save</v-btn>
@@ -136,9 +138,21 @@ export default {
    computed: {
      ...mapGetters('UserProfile', {
       profile: 'getUser',
-    })
+    }),
+    ...mapState({
+      user : s => s.UserProfile.user,
+    }),
    },
   methods : {
+      changePassword() {
+          this.$store.dispatch('UserProfile/changePassword',{
+            username : this.user.UserName,
+            oldPassword : this.oldPassword,
+            newPassword : this.newPassword
+          });
+          this.newPassword = '';
+          this.oldPassword = '';
+      },
       save() {
           let u = {
             firstName: this.firstname,

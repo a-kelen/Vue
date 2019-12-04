@@ -83,14 +83,36 @@
 </template>
 
 <script>
+import { HubConnectionBuilder,HttpTransportType, LogLevel } from '@aspnet/signalr'
+import {mapGetters,mapState} from 'vuex'
 
 export default {
   name: 'Chats',
   data: () => ({
-    //
+    connection : null
   }),
   methods : {
-
+    go(){}
+  },
+  created(){
+    this.connection = new HubConnectionBuilder()
+    .withUrl('/chat',{ transport: HttpTransportType.WebSockets | HttpTransportType.LongPolling})
+    .build();
+    this.connection.serverTimeoutInMilliseconds = 1000 * 60 * 10;
+    this.connection.start();
+    this.connection.invoke('Send', "Hello SignalR", "Tom");
+    this.connection.on('Receive', function (message, userName) {
+ 
+    console.log(message);
+    console.log(userName);
+});
+    
+    
+  },
+  computed: {
+    ...mapState({
+      user : s => s.UserProfile.profile,
+    }),
   }
 }
 </script>

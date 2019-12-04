@@ -14,6 +14,13 @@ const state = {
   
   // actions
   const actions = {
+      addPhoto({commit},obj) {
+        Axios.post('/api/Auditions/addphoto/'+ obj.auditionId, obj.auditionPhoto,{
+            headers: {'Content-Type': 'multipart/form-data'}
+        }).then(res => {
+            console.log(res);
+        });
+      },
     getAuditions({commit},id) {
         Axios.get('/api/Auditions/').then(res => {
             console.log(res);

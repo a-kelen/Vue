@@ -2,7 +2,8 @@ import Axios from '../axios'
 import router from '../../router'
 const state = {
     tests: [],
-    allTests: []
+    allTests: [],
+    count : 0
   }
   
   // getters
@@ -32,9 +33,9 @@ const state = {
         
     });
   },
-    getAllTests({commit,state},id) {
-      if(state.allTests.length==0)
-      Axios.get('/api/Tests/').then(res => {
+    getAllTests({commit,state},page) {
+      
+      Axios.get('api/Tests/paging?Page='+page+'&Limit=2').then(res => {
           commit('SET_ALLTESTS',res.data);
           console.log(res);
       });
@@ -56,7 +57,12 @@ deleteTest({commit},id) {
       state.tests = list;
   },
   SET_ALLTESTS (state, list) {
-    state.allTests = list;
+    state.allTests = list.items;
+    if(list.allCount%2 == 0)
+    state.count = list.allCount;
+    else
+    state.count = list.allCount + 1;
+
   },
   ADD_TEST (state, test) {
     state.tests.push(test);

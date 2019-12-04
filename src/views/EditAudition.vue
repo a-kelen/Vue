@@ -1,6 +1,13 @@
 <template>
   <v-container>
     <v-row>
+                   <v-file-input accept="image/*"  v-model="audPhoto" label="Photo input" prepend-icon="mdi-camera"></v-file-input>
+
+        <v-btn class="ma-3" @click="addPhoto">
+            add photo
+        </v-btn>
+    </v-row>
+    <v-row>
         <v-btn @click="showCreatePost = !showCreatePost">
             add post
         </v-btn>
@@ -91,7 +98,8 @@ export default {
     showCreatePost : true,
     audition : null,
     postText : '',
-    files : null
+    files : null,
+    audPhoto : null
   }),
   computed: {
     ...mapState({
@@ -107,6 +115,17 @@ export default {
    this.$store.dispatch('Test/getTests',this.$route.params.id);
   },
   methods: {
+    addPhoto() {
+      let photo =null;
+      if(this.audPhoto != null) {
+      photo = new FormData();
+      photo.append('photo',this.audPhoto);
+      this.$store.dispatch('Audition/addPhoto',{
+        auditionId : this.$route.params.id,
+        auditionPhoto : photo
+      });
+      } 
+    },
     deleteTest(id) {
        this.$store.dispatch('Test/deleteTest',id);
        this.sheet = false;

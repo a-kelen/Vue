@@ -2,7 +2,8 @@
   <v-sheet  class="d-flex  pa-3">
 
       <v-avatar size="80" color="grey darken-2">
-        <span>AQ</span>
+        <v-img v-if="audition.photo!=null" :src="image" ></v-img>
+        <span v-else>{{audition.name[0]}}</span>
       </v-avatar>
       
       <router-link class="mx-5" :to="{ name: 'audition', params: { id: audition.id }}" >{{audition.name}}</router-link>
@@ -58,6 +59,9 @@ export default {
           id : s => s.UserProfile.user,
           subscribes: s => s.Audition.subscribes
     }),
+    image() {
+          return 'https://localhost:44312' + this.audition.photo;
+      },
     isSubscribe(){
         return this.subscribes.find(x=>x.auditionId == this.audition.id) != null;
     }
