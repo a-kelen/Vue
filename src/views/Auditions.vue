@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     ...mapState({
-      id : s => s.UserProfile.user,
+      id : s => s.UserProfile.profile,
       auditions : s => s.Audition.auditions ,
       subscribes: s => s.Audition.subscribes
     })

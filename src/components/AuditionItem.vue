@@ -56,7 +56,7 @@ export default {
   },
   computed: {
       ...mapState({ 
-          id : s => s.UserProfile.user,
+          id : s => s.UserProfile.profile,
           subscribes: s => s.Audition.subscribes
     }),
     image() {

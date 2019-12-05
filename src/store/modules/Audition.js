@@ -18,7 +18,6 @@ const state = {
         Axios.post('/api/Auditions/addphoto/'+ obj.auditionId, obj.auditionPhoto,{
             headers: {'Content-Type': 'multipart/form-data'}
         }).then(res => {
-            console.log(res);
         });
       },
     getAuditions({commit},id) {
@@ -30,8 +29,7 @@ const state = {
     },
     getSubscribes({commit},id) {
         Axios.get('/api/Subscribers/byuser/'+id).then(res => {
-            
-            
+            console.log(res);
             commit('SET_SUBSCRIBES',res.data)
         });
     },
