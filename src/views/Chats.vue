@@ -129,10 +129,11 @@ export default {
    
     this.connection.on('Receive', function (chatId,userId, username, message, time) {
     console.log(chatId)
+    console.log(userId);
     console.log(username);
     console.log(message);
     console.log(time);
-
+    console.log(t.subscribes.filter(x => x.audition.chat.id == chatId)[0].audition.chat);
     t.subscribes.filter(x => x.audition.chat.id == chatId)[0].audition.chat.messages.push({
       date : time,
       text : message,

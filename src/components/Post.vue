@@ -17,7 +17,7 @@
       <v-img v-if="post.photo.path!=null" :src="image" ></v-img>
       <v-sheet color="grey lighten-4" class="pa-2 d-flex">
         <v-btn @click="showComms = !showComms">Comments</v-btn>
-        <div class="align-self-center mx-3">time</div>
+        <div class="align-self-center mx-3"></div>
 
         <v-spacer/>
         <div class="align-self-center mx-3">{{post.likesCount}}</div>

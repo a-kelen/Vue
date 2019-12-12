@@ -7,7 +7,7 @@
              </v-avatar>
           </div>
           <div class="mx-2">{{comment.userProfile.firstName}} {{comment.userProfile.lastName}}</div>
-          <div class="mx-2 ml-auto">time</div>
+          <div class="mx-2 ml-auto"></div>
       </v-sheet>
       <v-sheet color="" class="ma-2"> {{comment.text}} </v-sheet>
       <v-divider></v-divider>

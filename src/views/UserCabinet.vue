@@ -160,7 +160,7 @@ export default {
             birthday: new Date(),
             sex: (this.sex== 'true')
           }
-          this.$store.dispatch('UserProfile/update')
+          this.$store.dispatch('UserProfile/update',u);
           
       },
       deleteAccount() {

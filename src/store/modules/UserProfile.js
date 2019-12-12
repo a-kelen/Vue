@@ -25,12 +25,14 @@ const state = {
   
   // actions
   const actions = {
-    update({commit, state}) {
-        state.profile.FirstName = 'Tony';
-        state.profile.LastName = 'Stark';
+    update({commit, state},u) {
+        state.profile.FirstName = u.firstName;
+        state.profile.LastName = u.lastName;
+        state.profile.Sex = u.sex;
+        state.profile.Birthday = u.birthday;
         Axios({
             method: 'put',
-            url: '/api/UserProfiles/a1301cad-2809-48d8-2302-08d775849c38',
+            url: '/api/UserProfiles/'+ state.profile.Id,
             data: state.profile,
             }).then(res=>{
                 console.log(res);
